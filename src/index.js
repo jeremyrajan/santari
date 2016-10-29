@@ -16,7 +16,7 @@ const run = (repo, cb) => {
       init.run()
         .then((upgradedJSON) => {
           if (!upgradedJSON) {
-            return cb(null, '\nNothing to update. All good :)');
+            return cb(null, 'Nothing to update. All good :)');
           }
 
           tasks.add(santari.createBranch.bind(santari));
