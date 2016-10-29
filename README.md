@@ -9,6 +9,8 @@ Santari looks for dependencies in your project and creates a PR with the latest 
 2. If there are dependencies to be updated. It creates a new branch with updated dependencies package.json.
 3. If a branch exists with the updated dependencies, branch and PR creation is avoided.
 
+![image](https://cloud.githubusercontent.com/assets/2890683/19828761/93546cc4-9e01-11e6-8840-a931ce7f6711.png)
+
 ## Usage
 
 Create an environment variable `GITHUB_KEY` with your github access token. For more
