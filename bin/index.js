@@ -18,8 +18,8 @@ santariStarter(args.repo, (err, result) => {
     return logger.error(err);
   }
   if (!result.status) {
-    return logger.success(result);
+    return logger.success(JSON.stringify(result, null, 2));
   }
   logger.success('\nCongratulations! PR is created. Following are the details: ');
-  logger.success(result);
+  logger.success(JSON.stringify(result, null, 2));
 });

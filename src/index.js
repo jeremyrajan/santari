@@ -25,11 +25,11 @@ const run = (repo, cb) => {
 
           tasks.run()
             .then((result) => {
-              cb(null, JSON.stringify({
+              cb(null, {
                 url: result.url,
                 title: result.title,
                 status: result.state,
-              }, null, 2));
+              });
             })
             .catch((er) => {
               cb(er, null);
