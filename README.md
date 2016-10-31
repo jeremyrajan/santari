@@ -16,6 +16,8 @@ Santari looks for dependencies in your project and creates a PR with the latest 
 Create an environment variable `GITHUB_KEY` with your github access token. For more
 details visit https://github.com/blog/1509-personal-api-tokens.
 
+Please make sure, you have read-write access to the repo(s).
+
 ```
 [sudo] npm i -g santari
 
