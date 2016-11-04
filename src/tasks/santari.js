@@ -7,6 +7,7 @@ const packageLib = require('./package');
 const ncu = require('npm-check-updates');
 const deepEqual = require('deep-equal');
 const logger = require('../libs/logger');
+const fs = require('fs');
 
 const accessKey = process.env.GITHUB_KEY;
 
@@ -143,13 +144,27 @@ module.exports = class Santari {
     });
   }
 
+  deletePackageTemp() {
+    try {
+      fs.unlinkSync(this.packageTempPath);
+    } catch (e) {
+      return e;
+    }
+  }
+
   createPR() {
     return new Promise((resolve, reject) => {
       this.repoDetails.pr(this.prOpts, (err, result) => {
         if (err) {
           return reject(err);
         }
-        return resolve(result);
+
+        const deleteResult = this.deletePackageTemp();
+        if (!deleteResult) { // if delete returns undefined, we should be good :)
+          return resolve(result);
+        }
+
+        reject(deleteResult); // if error is passed back
       });
     });
   }

@@ -1,6 +1,6 @@
 {
   "name": "santari",
-  "version": "2.1.2",
+  "version": "2.2.0",
   "description": "Dependency Watcher",
   "main": "index.js",
   "scripts": {
@@ -22,7 +22,6 @@
   "dependencies": {
     "chalk": "^1.1.3",
     "deep-equal": "^1.0.1",
-    "github-api": "^2.3.0",
     "node-cron-job": "^0.2.3",
     "npm-check-updates": "^2.8.6",
     "octonode": "^0.7.6",
