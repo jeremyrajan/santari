@@ -1,5 +1,6 @@
 const Santari = require('./tasks/santari');
 const PromiseSeries = require('promise-series');
+const execSync = require('child_process').execSync;
 
 const init = new PromiseSeries();
 const tasks = new PromiseSeries();
@@ -19,8 +20,10 @@ const run = (repo, cb) => {
             return cb(null, 'Nothing to update. All good :)');
           }
 
+          execSync('npm config set progress=false');
           tasks.add(santari.createBranch.bind(santari));
           tasks.add(santari.updatePackageFile.bind(santari, 'updating-deps', upgradedJSON));
+          execSync('npm config set progress=true');
           tasks.add(santari.createPR.bind(santari));
 
           tasks.run()

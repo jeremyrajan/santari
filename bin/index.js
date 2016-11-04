@@ -2,6 +2,7 @@
 
 const santariStarter = require('../src/index');
 const logger = require('../src/libs/logger');
+const schedular = require('../src/tasks/schedular');
 const args = require('yargs')
   .usage('Usage: $0 --repo [repo name]')
   .example('$0 --repo jeremyrajan/frontend-starter', 'Check the dependencies and sends a PR')
@@ -11,6 +12,11 @@ const args = require('yargs')
 if (!args.repo) {
   logger.error('Repo is not supplied!');
   process.exit(0);
+}
+
+if (args.watch) {
+  console.log(args.watch);
+  // schedular.init();
 }
 
 santariStarter(args.repo, (err, result) => {

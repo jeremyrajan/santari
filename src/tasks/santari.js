@@ -91,7 +91,8 @@ module.exports = class Santari {
         packageFile: this.packageTempPath,
         silent: true,
         jsonUpgraded: true,
-        jsonAll: true
+        jsonAll: true,
+        loglevel: 'silent'
       })
         .then((newPackageJSON) => {
           if (deepEqual(newPackageJSON, this.packageJSON)) {
