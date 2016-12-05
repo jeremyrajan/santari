@@ -127,7 +127,7 @@ module.exports = class Santari {
       }
 
       // update the minor version
-      content.version = semver.inc(content.version, 'minor'); // eslint-disable-line
+      content.version = semver.inc(content.version, 'patch'); // eslint-disable-line
 
       this.repoDetails.updateContents(this.packagePath,
         commitMessage,
