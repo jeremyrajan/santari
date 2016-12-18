@@ -1,5 +1,5 @@
 const chalk = require('chalk');
-
+// simple logger
 module.exports = {
   error(...args) {
     console.log('\n', chalk.red(...args));

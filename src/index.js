@@ -2,11 +2,14 @@ const Santari = require('./tasks/santari');
 const PromiseSeries = require('promise-series');
 const logger = require('./libs/logger');
 
+// init series promises.
 const init = new PromiseSeries();
 const tasks = new PromiseSeries();
 
 const run = (repo, cb) => {
   let santari;
+
+  // try catch :)
   try {
     santari = new Santari(repo);
   } catch (error) {
@@ -14,6 +17,11 @@ const run = (repo, cb) => {
     process.exit(0);
   }
 
+  /**
+   * Checks if the branch created by santari already exists.
+   * If yes, then bail. Otherwise, continue with checking
+   * further information.
+   */
   santari.checkAlreadyExists()
     .then(() => {
       init.add(santari.getBranchDetails.bind(santari));
