@@ -1,0 +1,18 @@
+language: node_js
+node_js:
+  - "6.9.2"
+
+before_install:
+  - npm install gulp -g
+
+script:
+  - gulp --verbose
+
+cache:
+  directories:
+  - bower_components
+  - node_modules
+
+notifications:
+  email:
+    - jeremyrajan@gmail.com

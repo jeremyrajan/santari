@@ -6,21 +6,18 @@ const uuid = require('../libs/uuid');
 const packageLib = require('./package');
 const ncu = require('npm-check-updates');
 const deepEqual = require('deep-equal');
-const logger = require('../libs/logger');
 const fs = require('fs');
-
-const accessKey = process.env.GITHUB_KEY;
-
-if (!accessKey) {
-  logger.error('Github access token environment variable does not exist! Please create one at GITHUB_KEY');
-  process.exit(0);
-}
-
-const client = github.client(accessKey);
 
 module.exports = class Santari {
   constructor(repoName) {
-    this.repoDetails = client.repo(repoName);
+    this.accessKey = process.env.GITHUB_KEY;
+
+    if (!this.accessKey) {
+      throw new Error('Github access token environment variable does not exist! Please create one at GITHUB_KEY');
+    }
+
+    this.client = github.client(this.accessKey);
+    this.repoDetails = this.client.repo(repoName);
     this.masterSHA = ''; // master SHA
     this.packageSHA = ''; // package JSON SHA
     this.packagePath = ''; // package path from repo

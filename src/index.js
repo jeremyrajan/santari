@@ -1,11 +1,18 @@
 const Santari = require('./tasks/santari');
 const PromiseSeries = require('promise-series');
+const logger = require('./libs/logger');
 
 const init = new PromiseSeries();
 const tasks = new PromiseSeries();
 
 const run = (repo, cb) => {
-  const santari = new Santari(repo);
+  let santari;
+  try {
+    santari = new Santari(repo);
+  } catch (error) {
+    logger.error(error);
+    process.exit(0);
+  }
 
   santari.checkAlreadyExists()
     .then(() => {
