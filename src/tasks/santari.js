@@ -107,6 +107,39 @@ module.exports = class Santari {
   }
 
   /**
+   * Validates the new package.json, if we need to upgrade
+   * so that we dont override certains things.
+   * For eg: Locked versions.
+   */
+  validatePackageJson(packageJSON) {
+    const { dependencies, devDependencies } = packageJSON;
+    const newDeps = {};
+    const newDevDeps = {};
+
+    // for dependencies
+    for (const depName of Object.keys(dependencies)) { // eslint-disable-line
+      if (isNaN(parseFloat(dependencies[depName]))) {
+        newDeps[depName] = dependencies[depName];
+      } else {
+        newDeps[depName] = this.packageJSON.dependencies[depName];
+      }
+    }
+
+    // for devDependencies
+    for (const depName of Object.keys(devDependencies)) { // eslint-disable-line
+      if (isNaN(parseFloat(devDependencies[depName]))) {
+        newDevDeps[depName] = devDependencies[depName];
+      } else {
+        newDevDeps[depName] = this.packageJSON.devDependencies[depName];
+      }
+    }
+
+    packageJSON.dependencies = newDeps; // eslint-disable-line
+    packageJSON.devDependencies = newDevDeps; // eslint-disable-line
+    return packageJSON;
+  }
+
+  /**
    * This is where we run `ncu` to get the updated
    * package JSON information.
    */
@@ -122,7 +155,7 @@ module.exports = class Santari {
           if (deepEqual(newPackageJSON, this.packageJSON)) {
             return resolve(null); // nothing to update
           }
-          resolve(newPackageJSON);
+          resolve(this.validatePackageJson(newPackageJSON));
         })
         .catch((e) => {
           reject(e);
