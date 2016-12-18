@@ -1,5 +1,7 @@
 # Santari
 
+[![Build Status](https://travis-ci.org/jeremyrajan/santari.svg?branch=master)](https://travis-ci.org/jeremyrajan/santari)
+
 ## About
 Santari (a.k.a sentry. Refer: http://www.dictionary4edu.com/santari-english-meaning.html) stands for guardsman/watchman in hindi.
 Santari looks for dependencies in your project and creates a PR with the latest dependency changes.
