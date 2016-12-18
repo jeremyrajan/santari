@@ -1,0 +1,25 @@
+{
+  "name": "my lib",
+  "version": "6.2.1",
+  "description": "my lib",
+  "main": "index.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "author": "jeremy",
+  "license": "MIT",
+  "dependencies": {
+    "chai": "^3.5.0",
+    "chalk": "^1.1.3",
+    "cucumber": "1.3.1",
+    "faker": "^3.1.0",
+    "fs-extra": "^1.0.0",
+    "glob": "^7.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^3.11.1",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^3.0.1",
+    "gulp-istanbul": "^1.1.1"
+  }
+}

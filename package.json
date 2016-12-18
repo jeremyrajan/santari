@@ -1,6 +1,6 @@
 {
   "name": "santari",
-  "version": "2.2.2",
+  "version": "2.3.0",
   "description": "Dependency Watcher",
   "main": "index.js",
   "scripts": {

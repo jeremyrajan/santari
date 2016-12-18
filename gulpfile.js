@@ -6,7 +6,8 @@ const path = require('path');
 gulp.task('unit_tests', () => {
   gulp.src(path.join(__dirname, 'tests', '*.test.js'), { read: false })
     .pipe(mocha({
-      reporter: 'spec'
+      reporter: 'spec',
+      timeout: 20000
     }));
 });
 

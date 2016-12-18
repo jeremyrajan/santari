@@ -8,10 +8,17 @@ const ncu = require('npm-check-updates');
 const deepEqual = require('deep-equal');
 const fs = require('fs');
 
+/**
+ * The base case for Santari, which perform various
+ * ops such as checking for santari branches, updates,
+ * writing new package files, creating a branch, and
+ * creating a PR.
+ */
 module.exports = class Santari {
   constructor(repoName) {
     this.accessKey = process.env.GITHUB_KEY;
 
+    // If we dont have the accessKey then bail!
     if (!this.accessKey) {
       throw new Error('Github access token environment variable does not exist! Please create one at GITHUB_KEY');
     }
@@ -33,6 +40,11 @@ module.exports = class Santari {
     };
   }
 
+  /**
+   * Check if we already have a branch with sanatri in them
+   * We dont want to create and check, if there is already a
+   * active branch.
+   */
   checkAlreadyExists() {
     return new Promise((resolve, reject) => {
       this.repoDetails.branches((err, branches) => {
@@ -47,6 +59,10 @@ module.exports = class Santari {
     });
   }
 
+  /**
+   * Gets branch details, mainly used to get the
+   * latest commit SHA.
+   */
   getBranchDetails(branchName = 'master') {
     return new Promise((resolve, reject) => {
       this.repoDetails.branch(branchName, (err, result) => {
@@ -61,6 +77,9 @@ module.exports = class Santari {
     });
   }
 
+  /**
+   * Gets the package.json, for version checking.
+   */
   getPackageDetails() {
     return new Promise((resolve, reject) => {
       this.repoDetails.contents('package.json', (err, result) => {
@@ -76,6 +95,10 @@ module.exports = class Santari {
     });
   }
 
+  /**
+   * Writes the new package JSON file in a temporary
+   * directory. This is later deleted!
+   */
   writePackageToTemp(content) {
     const tempId = uuid();
     const packagePath = path.join(osTmpdir, `package_${tempId}.json`);
@@ -83,6 +106,43 @@ module.exports = class Santari {
     this.packageTempPath = packagePath;
   }
 
+  /**
+   * Validates the new package.json, if we need to upgrade
+   * so that we dont override certains things.
+   * For eg: Locked versions.
+   */
+  validatePackageJson(packageJSON) {
+    const { dependencies, devDependencies } = packageJSON;
+    const newDeps = {};
+    const newDevDeps = {};
+
+    // for dependencies
+    for (const depName of Object.keys(dependencies)) { // eslint-disable-line
+      if (isNaN(parseFloat(dependencies[depName]))) {
+        newDeps[depName] = dependencies[depName];
+      } else {
+        newDeps[depName] = this.packageJSON.dependencies[depName];
+      }
+    }
+
+    // for devDependencies
+    for (const depName of Object.keys(devDependencies)) { // eslint-disable-line
+      if (isNaN(parseFloat(devDependencies[depName]))) {
+        newDevDeps[depName] = devDependencies[depName];
+      } else {
+        newDevDeps[depName] = this.packageJSON.devDependencies[depName];
+      }
+    }
+
+    packageJSON.dependencies = newDeps; // eslint-disable-line
+    packageJSON.devDependencies = newDevDeps; // eslint-disable-line
+    return packageJSON;
+  }
+
+  /**
+   * This is where we run `ncu` to get the updated
+   * package JSON information.
+   */
   checkForUpdates() {
     return new Promise((resolve, reject) => {
       ncu.run({
@@ -95,7 +155,7 @@ module.exports = class Santari {
           if (deepEqual(newPackageJSON, this.packageJSON)) {
             return resolve(null); // nothing to update
           }
-          resolve(newPackageJSON);
+          resolve(this.validatePackageJson(newPackageJSON));
         })
         .catch((e) => {
           reject(e);
@@ -103,6 +163,10 @@ module.exports = class Santari {
     });
   }
 
+  /**
+   * Creates a new Branch, where the updated package json
+   * is uploaded.
+   */
   createBranch() {
     return new Promise((resolve, reject) => {
       if (!this.masterSHA) {
@@ -117,6 +181,9 @@ module.exports = class Santari {
     });
   }
 
+  /**
+   * Updates the package file.
+   */
   updatePackageFile(commitMessage, content) {
     return new Promise((resolve, reject) => {
       if (!this.packageSHA || !this.packagePath) {
@@ -140,6 +207,10 @@ module.exports = class Santari {
     });
   }
 
+  /**
+   * Deletes the temporary package.json
+   * that was created.
+   */
   deletePackageTemp() {
     try {
       fs.unlinkSync(this.packageTempPath);
@@ -148,6 +219,10 @@ module.exports = class Santari {
     }
   }
 
+  /**
+   * Creates a PR with the updated package.json
+   * information.
+   */
   createPR() {
     return new Promise((resolve, reject) => {
       this.repoDetails.pr(this.prOpts, (err, result) => {
