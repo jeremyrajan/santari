@@ -33,6 +33,18 @@ santari --repo jeremyrajan/santari
 
 Replace the repo option with `username/repo-name`.
 
+## Automatic Checking
+
+> Please note that this example uses travis CI.
+
+1. Add `npm i -g santari` to `before_install` https://github.com/jeremyrajan/santari/blob/master/.travis.yml#L12
+2. Add `santari --repo <author>/<name_of_repo>` to `after_success` https://github.com/jeremyrajan/santari/blob/master/.travis.yml#L13
+3. Configure cron in travis CI for the repo. You have a choice between daily, weekly or monthly.
+
+This repo, is configured on automatic updates on a daily basis. Please refer to [.travis.yml](https://github.com/jeremyrajan/santari/blob/master/.travis.yml). For more details on cron jobs for travis, please refer [here](https://docs.travis-ci.com/user/cron-jobs/).
+
+Please note that the setup is the same, if your CI supports cron jobs.
+
 ## Feedback/contributions
 1. Open a issue tracker/PR for contributions.
 2. Send an email jeremyrajan[at]gmail[dot]com.
