@@ -43,7 +43,7 @@ Replace the repo option with `username/repo-name`.
 
 This repo, is configured on automatic updates on a daily basis. Please refer to [.travis.yml](https://github.com/jeremyrajan/santari/blob/master/.travis.yml). For more details on cron jobs for travis, please refer [here](https://docs.travis-ci.com/user/cron-jobs/).
 
-Please note that the setup is the same, if your CI supports cron jobs.
+The setup is the same, if your CI supports cron jobs.
 
 ## Feedback/contributions
 1. Open a issue tracker/PR for contributions.
