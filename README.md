@@ -37,11 +37,14 @@ Replace the repo option with `username/repo-name`.
 
 > Please note that this example uses travis CI.
 
-1. Add `npm i -g santari` to `before_install` https://github.com/jeremyrajan/santari/blob/master/.travis.yml#L12
-2. Add `santari --repo <author>/<name_of_repo>` to `after_success` https://github.com/jeremyrajan/santari/blob/master/.travis.yml#L13
-3. Configure cron in travis CI for the repo. You have a choice between daily, weekly or monthly.
+1. Add `GITHUB_KEY` with your access token as `ENV` variable.
+2. Add `npm i -g santari` to [`before_install`](https://github.com/jeremyrajan/santari/blob/master/.travis.yml#L12)
+3. Add `santari --repo <author>/<name_of_repo>` to [`after_success`](https://github.com/jeremyrajan/santari/blob/master/.travis.yml#L13)
+4. Configure cron in travis CI for the repo. You have a choice between daily, weekly or monthly.
 
-This repo, is configured on automatic updates on a daily basis. Please refer to [.travis.yml](https://github.com/jeremyrajan/santari/blob/master/.travis.yml). For more details on cron jobs for travis, please refer [here](https://docs.travis-ci.com/user/cron-jobs/).
+This repo, is configured for automatic updates on a daily basis, [.travis.yml](https://github.com/jeremyrajan/santari/blob/master/.travis.yml). For more details on cron jobs for travis, please refer [here](https://docs.travis-ci.com/user/cron-jobs/).
+
+![image](https://cloud.githubusercontent.com/assets/2890683/21299994/9fac86a8-c5db-11e6-9ff3-d9aa29e1c4e4.png)
 
 The setup is the same, if your CI supports cron jobs.
 
