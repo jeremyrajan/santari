@@ -6,7 +6,8 @@ const packageJSON = require('../package.json');
 
 // check the version number for checking.
 // dont want to get it into yargs yet, as we want to demand --repo always.
-if (process.argv.pop() === '-v') {
+const checkArgs = process.argv;
+if (checkArgs[checkArgs.length - 1] === '-v') {
   logger.info(`Santari version: ${packageJSON.version}`);
   process.exit(0);
 }
