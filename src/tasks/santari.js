@@ -118,7 +118,7 @@ module.exports = class Santari {
     const { dependencies, devDependencies } = packageJSON;
     const newDeps = {};
     const newDevDeps = {};
-   
+
     if (!dependencies || !devDependencies) {
       return packageJSON;
     }
