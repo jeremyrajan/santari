@@ -1,17 +1,18 @@
 const Santari = require('./tasks/santari');
 const PromiseSeries = require('promise-series');
 const logger = require('./libs/logger');
+const prettyPrinter = require('./libs/prettyPrinter');
 
 // init series promises.
 const init = new PromiseSeries();
 const tasks = new PromiseSeries();
 
-const run = (repo, cb) => {
+const run = (args, cb) => {
   let santari;
 
   // try catch :)
   try {
-    santari = new Santari(repo);
+    santari = new Santari(args);
   } catch (error) {
     logger.error(error);
     process.exit(0);
@@ -22,16 +23,25 @@ const run = (repo, cb) => {
    * If yes, then bail. Otherwise, continue with checking
    * further information.
    */
-  santari.checkAlreadyExists()
+  santari.checkAlreadyExists(!args.dry)
     .then(() => {
       init.add(santari.getBranchDetails.bind(santari));
       init.add(santari.getPackageDetails.bind(santari));
-      init.add(santari.checkForUpdates.bind(santari));
+      init.add(santari.checkForUpdates.bind(santari, args.dry));
 
       init.run()
         .then((upgradedJSON) => {
-          if (!upgradedJSON) {
+          if (!upgradedJSON || !Object.keys(upgradedJSON).length) {
             return cb(null, 'Nothing to update. All good :)');
+          }
+
+          /**
+           * If we have passed the option --dry,
+           * then bail on creation of branch and PR.
+           * Just display the data.
+           */
+          if (args.dry) {
+            return Promise.resolve(prettyPrinter(upgradedJSON));
           }
 
           tasks.add(santari.createBranch.bind(santari));
