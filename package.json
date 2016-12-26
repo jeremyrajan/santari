@@ -39,7 +39,8 @@
     "gulp-eslint": "^3.0.1",
     "gulp-mocha": "^3.0.1",
     "proxyquire": "^1.7.10",
-    "sinon": "^1.17.6"
+    "sinon": "^1.17.6",
+    "update-notifier": "^1.0.3"
   },
   "bin": {
     "santari": "bin/index.js"
