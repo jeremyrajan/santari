@@ -11,6 +11,9 @@ script:
   
 after_success:
   - santari --repo jeremyrajan/santari
+  - chmod +x ./scripts/npm_login.sh
+  - ./scripts/npm_login.sh
+  - gulp deploy
 
 cache:
   directories:
