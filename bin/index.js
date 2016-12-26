@@ -24,7 +24,7 @@ if (!args.repo) {
   process.exit(0);
 }
 
-santariStarter(args.repo, (err, result) => {
+santariStarter(args, (err, result) => {
   if (err) {
     return logger.error(err);
   }

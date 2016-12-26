@@ -15,7 +15,7 @@ const fs = require('fs');
  * creating a PR.
  */
 module.exports = class Santari {
-  constructor(repoName) {
+  constructor(args) {
     this.accessKey = process.env.GITHUB_KEY;
 
     // If we dont have the accessKey then bail!
@@ -24,7 +24,7 @@ module.exports = class Santari {
     }
 
     this.client = github.client(this.accessKey);
-    this.repoDetails = this.client.repo(repoName);
+    this.repoDetails = this.client.repo(args.repo);
     this.masterSHA = ''; // master SHA
     this.packageSHA = ''; // package JSON SHA
     this.packagePath = ''; // package path from repo
@@ -45,7 +45,10 @@ module.exports = class Santari {
    * We dont want to create and check, if there is already a
    * active branch.
    */
-  checkAlreadyExists() {
+  checkAlreadyExists(check = true) { // if we pass check as false, then override.
+    if (!check) {
+      return Promise.resolve(true);
+    }
     return new Promise((resolve, reject) => {
       this.repoDetails.branches((err, branches) => {
         if (err) {
@@ -116,6 +119,10 @@ module.exports = class Santari {
     const newDeps = {};
     const newDevDeps = {};
 
+    if (!dependencies || !devDependencies) {
+      return packageJSON;
+    }
+
     // for dependencies
     for (const depName of Object.keys(dependencies)) { // eslint-disable-line
       if (isNaN(parseFloat(dependencies[depName]))) {
@@ -143,13 +150,16 @@ module.exports = class Santari {
    * This is where we run `ncu` to get the updated
    * package JSON information.
    */
-  checkForUpdates() {
+  checkForUpdates(dry = false) {
+    // easier implementation for us to get
+    // updated deps instead of whole package.
     return new Promise((resolve, reject) => {
       ncu.run({
         packageFile: this.packageTempPath,
         silent: true,
         jsonUpgraded: true,
-        jsonAll: true
+        jsonAll: !dry,
+        loglevel: 'silent'
       })
         .then((newPackageJSON) => {
           if (deepEqual(newPackageJSON, this.packageJSON)) {
