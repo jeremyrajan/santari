@@ -19,7 +19,10 @@ module.exports = class Santari {
   constructor(args) {
     this.accessKey = process.env.GITHUB_KEY;
     // read the config file if passed
-    const config = utils.readConfigFile(args.c) || { pr: {} };
+    let config = { pr: {} };
+    if (args.c) {
+      config = utils.readConfigFile(args.c);
+    }
 
     // If we dont have the accessKey then bail!
     if (!this.accessKey) {
