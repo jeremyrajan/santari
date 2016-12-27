@@ -14,6 +14,7 @@ Santari looks for dependencies in your project and creates a PR with the latest 
 1. Gets your package.json file from your project and runs `npm-check-updates` in background.
 2. If there are dependencies to be updated. It creates a new branch with updated dependencies package.json.
 3. If a branch exists with the updated dependencies, branch and PR creation is avoided.
+4. If you have locked version for deps, they are not overrided.
 
 ![image](https://cloud.githubusercontent.com/assets/2890683/19828761/93546cc4-9e01-11e6-8840-a931ce7f6711.png)
 
@@ -32,6 +33,20 @@ santari --repo jeremyrajan/santari
 ```
 
 Replace the repo option with `username/repo-name`.
+
+#### Options
+
+You can pass the following options:
+
+1. `--dry`: If you pass this as argument then, santari will not create PR/branches and will only display the latest
+  packages to be updated.
+
+  ex: `santari --repo <author>/<repo> --dry`
+
+2. `--c`: From version > 2.5.0 you can pass a config file option wherein you can set PR details. Check [`.santari.json`](.santari.json) in
+  this repo.
+
+  ex: `santari --repo <author>/<repo> --c .santari.json`
 
 ## Automatic Checking
 

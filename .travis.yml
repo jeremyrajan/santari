@@ -13,8 +13,8 @@ after_success:
   - santari --repo jeremyrajan/santari
   - chmod +x ./scripts/npm_login.sh
   - ./scripts/npm_login.sh
-  - test $TRAVIS_BRANCH = "master" && 
-    gulp deploy
+  - chmod +x ./scripts/deploy.sh
+  - ./scripts/deploy.sh
 
 cache:
   directories:

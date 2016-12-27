@@ -7,6 +7,7 @@ const packageLib = require('./package');
 const ncu = require('npm-check-updates');
 const deepEqual = require('deep-equal');
 const fs = require('fs');
+const utils = require('../libs/utils');
 
 /**
  * The base case for Santari, which perform various
@@ -17,6 +18,11 @@ const fs = require('fs');
 module.exports = class Santari {
   constructor(args) {
     this.accessKey = process.env.GITHUB_KEY;
+    // read the config file if passed
+    let config = { pr: {} };
+    if (args.c) {
+      config = utils.readConfigFile(args.c);
+    }
 
     // If we dont have the accessKey then bail!
     if (!this.accessKey) {
@@ -33,8 +39,8 @@ module.exports = class Santari {
     this.depBranchName = `update-deps-santari-${Math.ceil(Math.random() * 100000)}`;
     this.mainBranch = 'master';
     this.prOpts = {
-      title: 'Updating Dependencies',
-      body: 'Dependencies to Update',
+      title: config.pr.title || 'Updating Dependencies',
+      body: config.pr.body || 'Dependencies to Update',
       head: this.depBranchName,
       base: this.mainBranch
     };
