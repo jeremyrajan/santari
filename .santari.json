@@ -2,5 +2,9 @@
   "pr": {
     "title": "Updating Dependencies from file",
     "body": "Dependencies to Update"
+  },
+  "ports": {
+    "b": 8080,
+    "f": 9090
   }
 }

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.2.3/css/bulma.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link href="css/style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="title">
+      <span><h1>Santari</h1></span>
+    </div>
+    <div id="container">
+      <div class="columns">
+        <div class="column is-narrow" id="sidebar">
+          <aside class="menu">
+            <p class="menu-label">
+              General
+            </p>
+            <ul class="menu-list">
+              <li><a data-href="#dashboard">Dashboard</a></li>
+            </ul>
+            <p class="menu-label">
+              Administration
+            </p>
+            <ul class="menu-list">
+              <li><a data-href="#jobs">Jobs</a></li>
+              <li><a data-href="#create">Create Job</a></li>
+              <li><a data-href="#settings">Settings</a></li>
+            </ul>
+          </aside>
+        </div>
+        <div class="column">
+          <div class="box" id="content">
+            <div id="dashboard">
+              <h1 class="title">Dashboard</h1><hr/>
+            </div>
+            <div id="jobs">
+              <h1 class="title">Jobs</h1><hr/>
+            </div>
+            <div id="create">
+              <h1 class="title">Create Job</h1><hr/>
+            </div>
+            <div id="settings">
+              <h1 class="title">Settings</h1><hr/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="js/render.js"></script>
+  </body>
+</html>

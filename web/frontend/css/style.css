@@ -1,0 +1,35 @@
+#title {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  background: #2C73D7;
+  color: white;
+}
+
+#title h1 {
+  font-size: x-large;
+}
+
+#container {
+  padding: 40px;
+}
+
+#sidebar {
+  width: 220px;
+}
+
+#content div {
+  display: none;
+}
+
+#content div:first-child {
+  display: block;
+}
+
+.show {
+  display: block;
+}
+
+i.fa-trash-o {
+  cursor: pointer;
+  color: maroon;
+}

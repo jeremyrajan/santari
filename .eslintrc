@@ -5,12 +5,16 @@
   "env": {
     "node": true,
     "es6": true,
-    "mocha": true
+    "mocha": true,
+    "jquery": true
   },
   "rules": {
     "no-console": 0,
     "comma-dangle": 0,
     "import/no-extraneous-dependencies": 0,
     "consistent-return": 0
+  },
+  "globals": {
+    "document": true
   }
 }
