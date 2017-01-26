@@ -1,6 +1,6 @@
 {
   "name": "santari",
-  "version": "2.5.3",
+  "version": "2.5.4",
   "description": "Dependency Watcher",
   "main": "index.js",
   "scripts": {
@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "eslint": "^3.14.0",
+    "eslint": "^3.14.1",
     "eslint-config-airbnb": "^14.0.0",
     "eslint-loader": "^1.6.1",
     "eslint-plugin-import": "^2.2.0",
