@@ -1,6 +1,6 @@
 # Santari
 
-[![Build Status](https://travis-ci.org/jeremyrajan/santari.svg?branch=master)](https://travis-ci.org/jeremyrajan/santari)
+[![Build Status](https://travis-ci.org/remicass/santari.svg?branch=tests)](https://travis-ci.org/remicass/santari)
 [![npm version](https://badge.fury.io/js/santari.svg)](https://badge.fury.io/js/santari)
 [![david.dm](https://david-dm.org/jeremyrajan/santari.svg)](https://david-dm.org/jeremyrajan/santari)
 
