@@ -209,7 +209,8 @@ module.exports = class Santari {
       // update the minor version
       content.version = semver.inc(content.version, 'patch'); // eslint-disable-line
 
-      this.repoDetails.updateContents(this.packagePath,
+      this.repoDetails.updateContents(
+        this.packagePath,
         commitMessage,
         JSON.stringify(content, null, 2),
         this.packageSHA,
@@ -219,7 +220,8 @@ module.exports = class Santari {
           }
 
           return resolve(result);
-        });
+        }
+      );
     });
   }
 
