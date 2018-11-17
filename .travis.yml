@@ -10,7 +10,7 @@ script:
   - gulp --verbose
   
 after_success:
-  - santari --repo jeremyrajan/santari
+  - santari --repo remicass/santari
   - chmod +x ./scripts/npm_login.sh
   - ./scripts/npm_login.sh
   - chmod +x ./scripts/deploy.sh
