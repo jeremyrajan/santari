@@ -2,11 +2,11 @@ const github = require('octonode');
 const osTmpdir = require('os-tmpdir')();
 const semver = require('semver');
 const path = require('path');
-const uuid = require('../libs/uuid');
-const packageLib = require('./package');
 const ncu = require('npm-check-updates');
 const deepEqual = require('deep-equal');
 const fs = require('fs');
+const uuid = require('../libs/uuid');
+const packageLib = require('./package');
 const utils = require('../libs/utils');
 
 /**

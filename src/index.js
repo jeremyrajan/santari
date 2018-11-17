@@ -1,5 +1,5 @@
-const Santari = require('./tasks/santari');
 const PromiseSeries = require('promise-series');
+const Santari = require('./tasks/santari');
 const logger = require('./libs/logger');
 const prettyPrinter = require('./libs/prettyPrinter');
 
