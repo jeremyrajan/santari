@@ -2,12 +2,12 @@ const gulp = require('gulp');
 const eslint = require('gulp-eslint');
 const mocha = require('gulp-mocha');
 const path = require('path');
+const { execSync } = require('child_process');
 const updateCheck = require('update-notifier');
 const packageJSON = require('./package.json');
-const execSync = require('child_process').execSync;
 
 gulp.task('unit_tests', () => {
-  gulp.src(path.join(__dirname, 'tests', '*.test.js'), { read: false })
+  return gulp.src(path.join(__dirname, 'tests', '*.test.js'), { read: false })
     .pipe(mocha({
       reporter: 'spec',
       timeout: 20000
@@ -15,7 +15,7 @@ gulp.task('unit_tests', () => {
 });
 
 gulp.task('lint', (done) => {
-  gulp.src(['src/**/*.js'])
+  return gulp.src(['src/**/*.js'])
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError())
@@ -43,5 +43,4 @@ gulp.task('deploy', () => {
   });
 });
 
-
-gulp.task('default', ['lint', 'unit_tests'], () => { });
+gulp.task('default', gulp.series(['lint', 'unit_tests']));
