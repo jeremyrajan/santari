@@ -1,5 +1,6 @@
 # Santari
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b24ceaee9b6e4188b06a9b005299bd3d)](https://app.codacy.com/app/jeremyrajan/santari?utm_source=github.com&utm_medium=referral&utm_content=remicass/santari&utm_campaign=Badge_Grade_Settings)
 [![Build Status](https://travis-ci.org/remicass/santari.svg?branch=tests)](https://travis-ci.org/remicass/santari)
 [![npm version](https://badge.fury.io/js/santari.svg)](https://badge.fury.io/js/santari)
 [![david.dm](https://david-dm.org/jeremyrajan/santari.svg)](https://david-dm.org/jeremyrajan/santari)
