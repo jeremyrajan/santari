@@ -2,5 +2,7 @@
   "pr": {
     "title": "Updating Dependencies from file",
     "body": "Dependencies to Update"
-  }
+  },
+  "repo": "foo/bar",
+  "apikey": "foo"
 }
