@@ -1,8 +1,8 @@
 {
   "pr": {
-    "title": "Updating Dependencies from file",
-    "body": "Dependencies to Update"
+    "title": "PR title",
+    "body": "PR Body"
   },
-  "repo": "foo/bar",
-  "apikey": "foo"
+  "repo": "remicass/santari",
+  "msg": "commit message goes here if you want"
 }

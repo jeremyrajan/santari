@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-
+const yargs = require('yargs');
 const santariStarter = require('../src/index');
 const logger = require('../src/libs/logger');
 const packageJSON = require('../package.json');
@@ -12,17 +12,34 @@ if (checkArgs[checkArgs.length - 1] === '-v') {
   process.exit(0);
 }
 
-const args = require('yargs')
+const args = yargs
+  .option('repo', {
+    alias: 'r',
+    describe: 'The repository to target your pull request. Reads from package.json if not supplied'
+  })
+  .option('dry', {
+    alias: 'd',
+    describe: 'Peform a dry run and print JSON to the console.'
+  })
+  .option('host', {
+    alias: 'h',
+    describe: 'Override the default github.com host. Useful for targeting Github enterprise'
+  })
+  .option('token', {
+    alias: 't',
+    describe: 'Redundant with environment variable GITHUB_KEY, will override if supplied. Can also be used instead of the environment variable.'
+  })
+  .option('config', {
+    alias: 'c',
+    describe: 'Config file. Defaults to ".santari.json". Keys supplied can match the input options on the cli.'
+  })
+  .option('msg', {
+    alias: 'm',
+    describe: 'Commit message header to use. Defaults to "chore(package.json): update dependencies". Body is written dynamically based on what is updated.'
+  })
   .usage('Usage: $0 --repo [repo name]')
   .example('$0 --repo jeremyrajan/frontend-starter', 'Check the dependencies and sends a PR')
-  .demand(['repo'])
   .argv;
-
-// if we cant find the repo then bail.
-if (!args.repo) {
-  logger.error('Repo is not supplied!');
-  process.exit(0);
-}
 
 santariStarter(args, (err, result) => {
   if (err) {
