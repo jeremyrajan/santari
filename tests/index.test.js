@@ -1,10 +1,11 @@
 const expect = require('chai').expect;
-const Santari = require('../src/tasks/santari');
 const path = require('path');
+const Santari = require('../src/tasks/santari');
+
 
 describe('santari', () => {
   describe('validations', () => {
-    it('should error out if ENV var is not found', () => {
+    it('should error out if ENV var or command line apikey is not found', () => {
       process.env.GITHUB_KEY = '';
       try {
         new Santari(); // eslint-disable-line
