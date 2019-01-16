@@ -46,7 +46,7 @@ module.exports = class Santari {
     this.packageJSON = ''; // JSON parsed version of repo package
     this.packageTempPath = ''; // package path where temp package is stored. To be used by ncu
     this.depBranchName = `update-deps-santari-${Math.ceil(Math.random() * 100000)}`;
-    this.mainBranch = 'master';
+    this.mainBranch = config.branch || 'master';
     this.commitMsg = config.msg || 'chore(package.json): update dependencies\n';
     this.prOpts = {
       title: config.pr.title || 'santari: updating dependencies',
@@ -82,7 +82,7 @@ module.exports = class Santari {
    * Gets branch details, mainly used to get the
    * latest commit SHA.
    */
-  getBranchDetails(branchName = 'master') {
+  getBranchDetails(branchName = this.mainBranch) {
     return new Promise((resolve, reject) => {
       this.repoDetails.branch(branchName, (err, result) => {
         if (err) {
