@@ -5,7 +5,7 @@
 [![npm version](https://badge.fury.io/js/santari.svg)](https://badge.fury.io/js/santari)
 [![david.dm](https://david-dm.org/jeremyrajan/santari.svg)](https://david-dm.org/jeremyrajan/santari)
 
-[![NPM](https://nodei.co/npm/santari.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/santari/)
+[![NPM](https://nodei.co/npm/santari.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/santari/) [![Greenkeeper badge](https://badges.greenkeeper.io/jeremyrajan/santari.svg)](https://greenkeeper.io/)
 
 ## About
 Santari (a.k.a sentry. Refer: http://www.dictionary4edu.com/santari-english-meaning.html) stands for guardsman/watchman in hindi.
