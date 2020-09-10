@@ -29,8 +29,8 @@
     "os-tmpdir": "^2.0.0",
     "prettyjson": "^1.2.1",
     "promise-series": "^1.0.0",
+    "yargs": "^13.3.0"
     "semver": "^5.7.1",
-    "yargs": "^13.2.2"
   },
   "devDependencies": {
     "chai": "^4.2.0",
